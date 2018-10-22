@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class ImageRecognition extends ServiceProvider
+class ImageRecognitionServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
