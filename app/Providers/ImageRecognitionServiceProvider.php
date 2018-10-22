@@ -23,6 +23,9 @@ class ImageRecognition extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            'App\ImageRecognitionInterface',
+            'App\Services\ImageRecognition\ClarifaiApiService'
+        );
     }
 }
