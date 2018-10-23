@@ -3,18 +3,21 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/style.css') }}">
+
 
     <title>{{config('app.name')}}</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet"> 
+        {{-- <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">  --}}
 
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                background-color: #080808;
                 color: #636b6f;
-                font-family: 'Nunito', sans-serif;
+                font-family: 'Kodchasan', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
@@ -81,7 +84,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    <span class="accent-1">P</span>
+                    <span class="accent-2">i</span>
+                    <span class="accent-3">c</span>
+                    <span class="accent-4">t</span>
                 </div>
 
                 <div class="links">
