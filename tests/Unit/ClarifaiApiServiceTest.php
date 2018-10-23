@@ -1,9 +1,11 @@
 <?php
- use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+namespace Tests\Unit;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
 use App\Services\ImageRecognition\ClarifaiApiService;
- class ExampleTest extends TestCase
+
+class ExampleTest extends TestCase
 {
     /**
      * Test the request is sent succesfully.
