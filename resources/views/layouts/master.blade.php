@@ -24,13 +24,22 @@
                 <!-- MENU TOGGLE BUTTON -->
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
-                    <img class="menu pinata" src="images/animal-blue.png">
+                    {{-- Hamburger icon. --}}
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
             </div>
              <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="font-1 nav navbar-nav navbar-right">
-                    <li><a href="{{ route('image')}}">Image Recognition</a></li>
+                <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{ route('image')}}">
+                                <span class="accent-1">P</span>
+                                <span class="accent-2">i</span>
+                                <span class="accent-3">c</span>
+                                <span class="accent-4">t</span>
+                            </a>
+                        </li>
                 </ul>
             </div>
          </div><!-- /.container-fluid -->
