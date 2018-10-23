@@ -4,4 +4,8 @@
 .accent-4{color:#bfaeaa;}
 /* .accent-5{color:#636b6f;} */
 
+body {margin-top:70px;}
+
 .navbar {font-size: 1.8em; background-color: #080808;}
+
+.alert {margin: 0px auto; }

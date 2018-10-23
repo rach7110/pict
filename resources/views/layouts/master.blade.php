@@ -16,8 +16,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.666667, maximum-scale=0.666667, user-scalable=0">
     <meta name="viewport" content="width=device-width">
 </head>
- <body style="margin-top:70px; margin-left:20px;">
-<nav class="navbar navbar-default navbar-fixed-top">
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -44,12 +44,27 @@
             </div>
          </div><!-- /.container-fluid -->
     </nav>
-    <!-- FLASH MESSAGES -->
-    @if(Session::has('message'))
-    <div class="alert {{ Session::get('alert-class', 'alert-info') }} alert-dismissable" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        {{Session::get('message')}}
+    <div class="container">
+        {{--  Error Messages --}}
+        @if(count($errors)>0)
+        <div class="alert alert-danger alert-dismissable" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <!-- FLASH MESSAGES -->
+        @if(Session::has('message'))
+        <div class="alert {{ Session::get('alert-class', 'alert-info') }} alert-dismissable" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{Session::get('message')}}
+        </div>
+        @endif
+
+        @yield('content')
     </div>
-    @endif
-     @yield('content')
 </body>
