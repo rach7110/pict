@@ -1,0 +1,4 @@
+X user can upload a file for analysis
+_ analysis happens as an event lsitener.
+_ results are shown to user.
+_ user can train analyzer
