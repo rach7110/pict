@@ -27,7 +27,12 @@ class ImageRecognitionController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO: Validate the file contents.
+        // Validate the file contents.
+        $rules = [
+            'image' => 'required|image|max:2000|mimes:,png,jpeg,jpg,gif,svg'
+        ];
+        
+        $request->validate($rules); 
 
         if (request()->file('image')->store('images')) {
             $request->session()->flash('message', 'File saved successfully');
