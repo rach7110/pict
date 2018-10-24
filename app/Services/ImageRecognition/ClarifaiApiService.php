@@ -9,14 +9,17 @@ use Clarifai\DTOs\Searches\SearchBy;
 use Clarifai\DTOs\Searches\SearchInputsResult;
 use Clarifai\DTOs\Models\ModelType;
 use App\ImageRecognitionInterface;
+
  class ClarifaiApiService implements ImageRecognitionInterface
 {
     private $client;
-     public function __construct() 
+
+    public function __construct() 
     {
         $this->client = new ClarifaiClient(config('clarifai.secret'));
     }
-     /** Send request to API that will analyze media content
+
+    /** Send request to API that will analyze media content
      * 
      * @param array $input
      * @return Object
@@ -24,7 +27,7 @@ use App\ImageRecognitionInterface;
     public function send_request($input)
     {
         $files =[];
-         foreach($input as $content) {
+        foreach($input as $content) {
             $files[] = new ClarifaiFileImage(file_get_contents($content));
         }
          //Remote file
@@ -36,6 +39,7 @@ use App\ImageRecognitionInterface;
          $response = $model->batchPredict($files)->executeSync();
          return $response;
     }
+
      public function display_output($response)
     {
         $outputs = $response->get();
