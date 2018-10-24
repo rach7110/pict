@@ -19,13 +19,12 @@ use App\ImageRecognitionInterface;
         $this->client = new ClarifaiClient(config('clarifai.secret'));
     }
 
-    public function analyzeImage($input, $concept=null)
+    public function analyzeImage($input)
     {
         $response = $this->send_request($input);
 
          if($response->isSuccessful()) {
-             dd('Success!');
-            return $this->imageRecognitionSvc->display_output($response);
+            return $this->output($response);
         } else {
              dd($response->status()->statusCode());
         }
@@ -43,35 +42,31 @@ use App\ImageRecognitionInterface;
         foreach($inputs as $input) {
             $files[] = new ClarifaiFileImage(file_get_contents($input));
         }
-
          //Remote file
         // $response = $model->batchPredict([
         //     new ClarifaiURLImage('https://samples.clarifai.com/metro-north.jpg'),
         //     new ClarifaiURLImage('https://samples.clarifai.com/wedding.jpg'),
         // ])->executeSync();  
-
         $model = $this->client->publicModels()->generalModel();
         $response = $model->batchPredict($files)->executeSync();
-
-         return $response;
+        
+        return $response;
     }
 
-     public function display_output($response)
-    {
+     public function output($response)
+    {        
         $outputs = $response->get();
+        $results = [];
+
          foreach ($outputs as $output) {
             /** @var ClarifaiURLImage $image */
-            $image = $output->input();
-            echo "Predicted concepts for image at url " . $image->url();
-            echo "</br>";
-            
+            $image_id = $output->input()->id();
             /** @var Concept $concept */
             foreach ($output->data() as $concept) {
-                echo $concept->name() . ': ' . $concept->value();
-                echo "</br>";
+                $results[$image_id][] = ['name' => $concept->name(), 'value' => $concept->value()];
             }
-            echo "</br>";
-            echo "</br>";
         }
+
+        return $results;
     }
 }
