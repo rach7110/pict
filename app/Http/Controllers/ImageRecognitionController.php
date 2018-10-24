@@ -29,13 +29,14 @@ class ImageRecognitionController extends Controller
     public function store(Request $request)
     {
         $content_file = request()->file('content');
-        $user_file = request()->file('image');
+        $user_files = request()->file('image');
+
         // dd($file->path());
         // dd($file->extension());
 
         // Validate the file contents.
         $rules = [
-            'image' => 'image|max:2000|mimes:,png,jpeg,jpg,gif,svg',
+            'image.*' => 'image|max:2000|mimes:,png,jpeg,jpg,gif,svg',
             'content' => 'image|max:2000|mimes:,png,jpeg,jpg,gif,svg'
         ];
         
@@ -43,8 +44,8 @@ class ImageRecognitionController extends Controller
 
         // $file = $user_file->store('images');
 
-        if ($user_file) {
-            $this->imageRecognitionSvc->analyzeImage($user_file);
+        if ($user_files) {
+            $this->imageRecognitionSvc->analyzeImage($user_files);
         // return redirect('image');
 
         } else {

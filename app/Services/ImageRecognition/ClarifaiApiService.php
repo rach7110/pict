@@ -14,9 +14,21 @@ use App\ImageRecognitionInterface;
 {
     private $client;
 
-    public function __construct() 
+    public function __construct()
     {
         $this->client = new ClarifaiClient(config('clarifai.secret'));
+    }
+
+    public function analyzeImage($input, $concept=null)
+    {
+        $response = $this->send_request($input);
+
+         if($response->isSuccessful()) {
+             dd('Success!');
+            return $this->imageRecognitionSvc->display_output($response);
+        } else {
+             dd($response->status()->statusCode());
+        }
     }
 
     /** Send request to API that will analyze media content
@@ -24,19 +36,23 @@ use App\ImageRecognitionInterface;
      * @param array $input
      * @return Object
      */
-    public function send_request($input)
+    public function send_request($inputs)
     {
         $files =[];
-        foreach($input as $content) {
-            $files[] = new ClarifaiFileImage(file_get_contents($content));
+
+        foreach($inputs as $input) {
+            $files[] = new ClarifaiFileImage(file_get_contents($input));
         }
+
          //Remote file
         // $response = $model->batchPredict([
         //     new ClarifaiURLImage('https://samples.clarifai.com/metro-north.jpg'),
         //     new ClarifaiURLImage('https://samples.clarifai.com/wedding.jpg'),
         // ])->executeSync();  
-         $model = $this->client->publicModels()->generalModel();
-         $response = $model->batchPredict($files)->executeSync();
+
+        $model = $this->client->publicModels()->generalModel();
+        $response = $model->batchPredict($files)->executeSync();
+
          return $response;
     }
 

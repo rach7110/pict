@@ -11,7 +11,7 @@
         
         {{--  Content to train the image recogition model. --}}
         <div class="form-group" >
-            <label for="content">Content</label>
+            <h2>Content</h2>
             <p><strong>Description:</strong> this is the file you use to analyze all other files. </p>
             <input type="file" name="content" id="content" >
 
@@ -19,10 +19,10 @@
         </div>
         {{-- Image to be analyzed by model. --}}
         <div class="form-group" >
-            <label for="image">File</label>
+            <h2>Files</h2>
             <p><strong>Description:</strong> this is the file that is being analyzed for content. </p>
-
-            <input type="file" name="image" id="image" >
+            <input type="file" name="image[]">
+            <input type="file" name="image[]">
         </div>
         {{-- Submit --}}
          <input type="submit" value="Submit" style="margin-top: 30px;">
