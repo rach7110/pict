@@ -28,49 +28,30 @@ class ImageRecognitionController extends Controller
      */
     public function store(Request $request)
     {
+        $content_file = request()->file('content');
         $user_file = request()->file('image');
         // dd($file->path());
         // dd($file->extension());
 
         // Validate the file contents.
         $rules = [
-            'image' => 'required|image|max:2000|mimes:,png,jpeg,jpg,gif,svg'
+            'image' => 'image|max:2000|mimes:,png,jpeg,jpg,gif,svg',
+            'content' => 'image|max:2000|mimes:,png,jpeg,jpg,gif,svg'
         ];
         
         $request->validate($rules);
 
-        $file = $user_file->store('images');
+        // $file = $user_file->store('images');
 
-        // Store the file contents.
-        if ($file) {
-            //TODO: store relative path to DB.
-            $upload = new Upload;
-            $upload->directory = $file;
-
-            $request->session()->flash('message', 'File saved successfully');
-            $request->session()->flash('alert-class', 'alert-success');
-            dd(Storage::get($file)->path());
+        if ($user_file) {
+            $this->imageRecognitionSvc->analyzeImage($user_file);
+        // return redirect('image');
 
         } else {
             $request->session()->flash('message', 'Problem uploading your file. Please try again in a few minutes.');
             $request->session()->flash('alert-class', 'alert-danger');
         }
 
-
-
-        // $this->analyzeImage($file);
-        // return redirect('image');
         // var_dump(config('filesystems.disks.local.root'));
-    }
-
-    public function analyzeImage($image)
-    {
-        $response = $this->imageRecognitionSvc->send_request($image);
-
-         if($response->isSuccessful()) {
-            return $this->imageRecognitionSvc->display_output($response);
-        } else {
-            return 'Response not successful. Error Code: ' . $response->status()->statusCode();
-        }
     }
 } 
