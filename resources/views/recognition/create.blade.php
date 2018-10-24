@@ -9,14 +9,13 @@
     <form method="POST" action="{{route('recognition')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         
-        {{--  Content to train the image recogition model. --}}
-        <div class="form-group" >
+         {{-- Content to train the image recogition model. --}}
+        {{-- <div class="form-group" >
             <h2>Content</h2>
             <p><strong>Description:</strong> this is the file you use to analyze all other files. </p>
             <input type="file" name="content" id="content" >
-
-
-        </div>
+        </div> --}}
+        
         {{-- Image to be analyzed by model. --}}
         <div class="form-group" >
             <h2>Files</h2>
@@ -27,4 +26,12 @@
         {{-- Submit --}}
          <input type="submit" value="Submit" style="margin-top: 30px;">
     </form>
+
+    @if(isset($results))
+        <p>Here are the results:</p>
+        @foreach($results as $result)
+        <p>{{$result['data']}}</p>
+
+        @endforeach
+    @endif
 @stop

@@ -13,6 +13,7 @@ use App\ImageRecognitionInterface;
  class ClarifaiApiService implements ImageRecognitionInterface
 {
     private $client;
+    protected $error;
 
     public function __construct()
     {
@@ -26,7 +27,9 @@ use App\ImageRecognitionInterface;
          if($response->isSuccessful()) {
             return $this->output($response);
         } else {
-             dd($response->status()->statusCode());
+            $this->error = "Status code: " . $response->status()->statusCode();
+
+            return false;
         }
     }
 
@@ -54,19 +57,27 @@ use App\ImageRecognitionInterface;
     }
 
      public function output($response)
-    {        
+    {
         $outputs = $response->get();
         $results = [];
 
          foreach ($outputs as $output) {
             /** @var ClarifaiURLImage $image */
             $image_id = $output->input()->id();
+            $data =[];
             /** @var Concept $concept */
             foreach ($output->data() as $concept) {
-                $results[$image_id][] = ['name' => $concept->name(), 'value' => $concept->value()];
+                $data[] = ['name' => $concept->name(), 'value' => $concept->value()];
             }
+            $results[] = ['id'=> $image_id, 'data' => $data];
+
         }
 
         return $results;
+    }
+
+    public function getErrors()
+    {
+        return $this->error;
     }
 }
