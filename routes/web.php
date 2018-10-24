@@ -16,5 +16,5 @@ Route::get('/', function () {
 });
 
 // Image recognition
-Route::get('/image', ['as' => 'image', 'uses' => 'ImageRecognitionController@create']);
-Route::post('/image', ['as' => 'image', 'uses' => 'ImageRecognitionController@store']);
+Route::get('/recognition', ['as' => 'recognition', 'uses' => 'ImageRecognitionController@create']);
+Route::post('/recognition', ['as' => 'recognition', 'uses' => 'ImageRecognitionController@store']);

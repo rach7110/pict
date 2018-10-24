@@ -17,7 +17,7 @@ class ImageRecognitionController extends Controller
     
     public function create()
     {
-        return view('images.create');
+        return view('recognition.create');
     }
     
     /**
@@ -31,6 +31,7 @@ class ImageRecognitionController extends Controller
         $user_file = request()->file('image');
         // dd($file->path());
         // dd($file->extension());
+
         // Validate the file contents.
         $rules = [
             'image' => 'required|image|max:2000|mimes:,png,jpeg,jpg,gif,svg'

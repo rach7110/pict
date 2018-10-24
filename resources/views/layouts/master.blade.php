@@ -33,7 +33,7 @@
              <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{ route('image')}}">
+                        <li><a href="{{ route('recognition')}}">
                                 <span class="accent-1">P</span>
                                 <span class="accent-2">i</span>
                                 <span class="accent-3">c</span>
