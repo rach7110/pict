@@ -71,7 +71,6 @@ use App\ImageRecognitionInterface;
      */
     public function output($response)
     {
-        dd($response);
         $outputs = $response->get();
         $results = [];
 
@@ -86,6 +85,7 @@ use App\ImageRecognitionInterface;
             $results[] = ['id'=> $image_id, 'data' => $data];
 
         }
+
         return $results;
     }
 

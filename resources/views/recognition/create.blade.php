@@ -30,8 +30,10 @@
     @if(isset($results))
         <p>Here are the results:</p>
         @foreach($results as $result)
-        <p>{{$result['data']}}</p>
-
+            <p>{{$result['id']}}</p>
+            @foreach($result['data'] as $concept)
+                <p>{{$concept['name']}}: <span class="color:blue;">{{$concept['value']}}</span></p>
+            @endforeach
         @endforeach
     @endif
 @stop
