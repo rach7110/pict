@@ -20,9 +20,15 @@ use App\ImageRecognitionInterface;
         $this->client = new ClarifaiClient(config('clarifai.secret'));
     }
 
-    public function analyzeImage($input)
+    /** Determine the concepts that are contained in the file inputs.
+     * 
+     * @param array $inputs
+     * @return array|bool 
+     */
+
+    public function analyzeImage($inputs)
     {
-        $response = $this->send_request($input);
+        $response = $this->send_request($inputs);
 
          if($response->isSuccessful()) {
             return $this->output($response);
@@ -32,8 +38,8 @@ use App\ImageRecognitionInterface;
             return false;
         }
     }
-
-    /** Send request to API that will analyze media content
+ 
+    /** Send request to API 
      * 
      * @param array $input
      * @return Object
@@ -45,19 +51,27 @@ use App\ImageRecognitionInterface;
         foreach($inputs as $input) {
             $files[] = new ClarifaiFileImage(file_get_contents($input));
         }
-         //Remote file
-        // $response = $model->batchPredict([
-        //     new ClarifaiURLImage('https://samples.clarifai.com/metro-north.jpg'),
-        //     new ClarifaiURLImage('https://samples.clarifai.com/wedding.jpg'),
-        // ])->executeSync();  
+ 
         $model = $this->client->publicModels()->generalModel();
         $response = $model->batchPredict($files)->executeSync();
         
         return $response;
+
+        //Remote file example:
+        // $response = $model->batchPredict([
+        //     new ClarifaiURLImage('https://samples.clarifai.com/metro-north.jpg'),
+        //     new ClarifaiURLImage('https://samples.clarifai.com/wedding.jpg'),
+        // ])->executeSync(); 
     }
 
-     public function output($response)
+    /** Format the output of the API response.
+     * 
+     * @param Object $response
+     * @return array
+     */
+    public function output($response)
     {
+        dd($response);
         $outputs = $response->get();
         $results = [];
 
@@ -72,7 +86,6 @@ use App\ImageRecognitionInterface;
             $results[] = ['id'=> $image_id, 'data' => $data];
 
         }
-
         return $results;
     }
 
