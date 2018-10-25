@@ -26,7 +26,7 @@ class ImageRecognitionController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function analyze(Request $request)
     {
         $content_file = request()->file('content');
         $user_files = request()->file('image');
