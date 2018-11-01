@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.666667, maximum-scale=0.666667, user-scalable=0">
     <meta name="viewport" content="width=device-width">
 </head>
-<body>
+<body class=".accent-5">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
