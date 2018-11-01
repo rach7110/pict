@@ -43,19 +43,23 @@ class ImageRecognitionController extends Controller
         
         $request->validate($rules);
 
-        $results = $this->imageRecognitionSvc->analyzeImage($user_files);
-        
-        if($results) {
+        $response = $this->imageRecognitionSvc->send_request($user_files);
+
+        if($response->isSuccessful()) {
+            $results =  $this->imageRecognitionSvc->transform($response);
+
             $request->session()->flash('message', 'Success!');
             $request->session()->flash('alert-class', 'alert-info');
             
             return view('recognition.show')->with(['results' => $results]);
         } else {
-            $request->session()->flash('message', 'Problem analyzing your file. Please try again in a few minutes. ' . $this->imageRecognitionSvc->getErrors());
+            $request->session()->flash('message', 'Problem analyzing your file. 
+                                        Please try again in a few minutes.  
+                                        Status code: ' . $response->status()->statusCode()
+                                        );
             $request->session()->flash('alert-class', 'alert-danger');
 
-            return redirect('recognition');
+            return redirect()->route('recognition');
         }
-
     }
 } 

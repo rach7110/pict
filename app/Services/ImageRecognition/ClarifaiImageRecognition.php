@@ -13,30 +13,10 @@ use App\ImageRecognitionInterface;
  class ClarifaiImageRecognition implements ImageRecognitionInterface
 {
     private $client;
-    protected $error;
 
     public function __construct()
     {
         $this->client = new ClarifaiClient(config('clarifai.secret'));
-    }
-
-    /** Determine the concepts that are contained in the file inputs.
-     * 
-     * @param array $inputs
-     * @return array|bool 
-     */
-
-    public function analyze($inputs)
-    {
-        $response = $this->send_request($inputs);
-
-         if($response->isSuccessful()) {
-            return $this->output($response);
-        } else {
-            $this->error = "Status code: " . $response->status()->statusCode();
-
-            return false;
-        }
     }
  
     /** Send request to API 
@@ -69,7 +49,7 @@ use App\ImageRecognitionInterface;
      * @param Object $response
      * @return array
      */
-    public function output($response)
+    public function transform($response)
     {
         $outputs = $response->get();
         $results = [];
@@ -87,10 +67,5 @@ use App\ImageRecognitionInterface;
         }
 
         return $results;
-    }
-
-    public function getErrors()
-    {
-        return $this->error;
     }
 }
