@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-class ImageControllerTest extends TestCase
+class ImageRecognitionControllerTest extends TestCase
 {
     /**
      * tet the validator works on a image upload.
