@@ -5,7 +5,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Services\ImageRecognition\ClarifaiImageRecognition;
 
-class ExampleTest extends TestCase
+class ClarifaiImageRecognitionTest extends TestCase
 {
     /**
      * Test the request is sent succesfully.
