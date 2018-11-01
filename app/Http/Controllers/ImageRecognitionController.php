@@ -49,7 +49,7 @@ class ImageRecognitionController extends Controller
             $request->session()->flash('message', 'Success!');
             $request->session()->flash('alert-class', 'alert-info');
             
-            return view('recognition.create')->with(['results' => $results]);
+            return view('recognition.show')->with(['results' => $results]);
         } else {
             $request->session()->flash('message', 'Problem analyzing your file. Please try again in a few minutes. ' . $this->imageRecognitionSvc->getErrors());
             $request->session()->flash('alert-class', 'alert-danger');
