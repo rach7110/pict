@@ -10,7 +10,7 @@ use Clarifai\DTOs\Searches\SearchInputsResult;
 use Clarifai\DTOs\Models\ModelType;
 use App\ImageRecognitionInterface;
 
- class ClarifaiApiService implements ImageRecognitionInterface
+ class ClarifaiImageRecognition implements ImageRecognitionInterface
 {
     private $client;
     protected $error;
@@ -26,7 +26,7 @@ use App\ImageRecognitionInterface;
      * @return array|bool 
      */
 
-    public function analyzeImage($inputs)
+    public function analyze($inputs)
     {
         $response = $this->send_request($inputs);
 

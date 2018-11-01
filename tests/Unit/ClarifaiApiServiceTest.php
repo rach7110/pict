@@ -3,7 +3,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-use App\Services\ImageRecognition\ClarifaiApiService;
+use App\Services\ImageRecognition\ClarifaiImageRecognition;
 
 class ExampleTest extends TestCase
 {
@@ -14,7 +14,7 @@ class ExampleTest extends TestCase
      */
     public function testSendRequestToClarifaiSingleInput()
     {
-        $svc = new ClarifaiApiService;
+        $svc = new ClarifaiImageRecognition;
         $input = ["https://samples.clarifai.com/metro-north.jpg"];
         $response = $svc->send_request($input);
          $this->assertEquals(true, $response->isSuccessful());
@@ -26,7 +26,7 @@ class ExampleTest extends TestCase
      */
     public function testSendRequestToClarifaiMultipleInputs()
     {
-        $svc = new ClarifaiApiService;
+        $svc = new ClarifaiImageRecognition;
         $input = [
             "https://samples.clarifai.com/metro-north.jpg", 
             "https://samples.clarifai.com/wedding.jpg"
