@@ -20,10 +20,10 @@
         <div class="form-group" >
             <h2>Files</h2>
             <p><strong>Description:</strong> this is the file that is being analyzed for content. </p>
-            <input type="file" name="image[]">
+            <input type="file" class="form-control-file" name="image[]">
             {{-- <input type="file" name="image[]"> --}}
         </div>
-        {{-- Submit --}}
-         <input type="submit" value="Submit" style="margin-top: 30px;">
+        {{-- Submit --}}    
+         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @stop

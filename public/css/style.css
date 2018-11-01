@@ -10,4 +10,6 @@ body {margin-top:70px; background-color: #636b6f;}
 
 .alert {margin: 0px auto; }
 
-.container {color: #bfaeaa;}
+.container {color: navajowhite; font-family: 'Courier New', Courier, monospace}
+
+button[type='submit'] { margin-top: 30px; }
