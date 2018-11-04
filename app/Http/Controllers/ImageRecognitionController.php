@@ -21,7 +21,7 @@ class ImageRecognitionController extends Controller
     }
     
     /**
-     * Store the image and send request to ImageReconition service.
+     * Send request to ImageReconition service.
      *
      * @param  Request  $request
      * @return Response
@@ -30,9 +30,6 @@ class ImageRecognitionController extends Controller
     {
         $content_file = request()->file('content');
         $user_files = request()->file('image');
-
-        // dd($file->path());
-        // dd($file->extension());
 
         // Validate the file contents.
         $rules = [
