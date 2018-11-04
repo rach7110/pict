@@ -21,20 +21,11 @@
             <h2>Files</h2>
             <p><strong>Description:</strong> this is the file that is being analyzed for content. </p>
             <div id="files">
-                <input type="file" class="form-control-file" name="image[]">
-                <i id="new-image" class="fas fa-plus-circle fa-2x"></i>
+                <input type="file" class="form-control-file" name="image[]" multiple>
             </div>
             
         </div>
         {{-- Submit --}}    
          <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
-    <script>
-        $('#new-image').click(function(e) {
-            e.preventDefault();
-            $("#files").append("<input type='file' class='form-control-file' name='image[]'>")
-        });
-
-    </script>
 @stop
