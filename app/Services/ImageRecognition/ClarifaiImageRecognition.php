@@ -55,15 +55,13 @@ use App\ImageRecognitionInterface;
         $results = [];
 
          foreach ($outputs as $output) {
-            /** @var ClarifaiURLImage $image */
             $image_id = $output->input()->id();
             $data =[];
-            /** @var Concept $concept */
+            
             foreach ($output->data() as $concept) {
                 $data[] = ['name' => $concept->name(), 'value' => $concept->value()];
             }
-            $results[] = ['id'=> $image_id, 'data' => $data];
-
+            $results[] = json_encode(['id'=> $image_id, 'data' => $data]);
         }
 
         return $results;
