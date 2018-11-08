@@ -46,24 +46,23 @@ use App\ImageRecognitionInterface;
 
     /** Format the output of the API response.
      * 
-     * @param Object $response
+     * @param ClarifaiObject $response
      * @return array
      */
     public function transform($response)
     {
-        $outputs = $response->get();
+        $file_outputs = $response->get();  // Returns an array of ClarifaiOtput objects.
         $results = [];
 
-         foreach ($outputs as $output) {
-            $image_id = $output->input()->id();
+         foreach ($file_outputs as $file_output) {
+            $image_id = $file_output->input()->id();
             $data =[];
             
-            foreach ($output->data() as $concept) {
-                $data[] = ['name' => $concept->name(), 'value' => $concept->value()];
+            foreach ($file_output->data() as $concept) {
+                $data[] = json_decode(json_encode(['name' => $concept->name(), 'value' => $concept->value()]));
             }
-            $results[] = json_encode(['id'=> $image_id, 'data' => $data]);
+            $results[] = ['id'=> $image_id, 'data' => $data];
         }
-
         return $results;
     }
 }
