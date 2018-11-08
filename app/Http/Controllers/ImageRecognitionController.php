@@ -44,9 +44,6 @@ class ImageRecognitionController extends Controller
 
         if($response->isSuccessful()) {
             $results = $this->imageRecognitionSvc->outputs($response);
-
-            $request->session()->flash('message', 'Success!');
-            $request->session()->flash('alert-class', 'alert-info');
             
             return view('recognition.show')->with(['results' => $results]);
         } else {
