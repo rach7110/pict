@@ -40,25 +40,29 @@ class ClarifaiImageRecognitionTest extends TestCase
     }
 
     /**
-     * Test it can transform the API request to a response containing: 
-     *   image id,
-     *   data containing an array of: concept names and percentages.
+     * Test it can transform the API request. Each array value contains: 
+     *   image id
+     *   data containing an array of obejcts with: concept names and percentages.
      *
      * @group clarifai
      */
-    public function test_clarifai_transforms_response()
+    public function test_clarifai_can_transform_response()
     {
         $response = $this->response2;
-        $formatted_response = $this->svc->transforms($response);
-        $content = json_decode($formatted_response[0]);
+        $formatted_response = $this->svc->transform($response);
+        $content = ($formatted_response[0]);
+
         // Results have an image 'id' key.
         $this->assertEquals(true, array_key_exists('id', $content));
         // Results have a 'data' key.
         $this->assertEquals(true, array_key_exists('data', $content));
+        // 'Data contains an array with 'name' and 'value' parameters
+        $this->assertEquals('train', $content['data'][0]->name );
+        $this->assertGreaterThan(0, $content['data'][0]->value );
     }
 
     /** 
-     * Test it can determine the content types of a file.
+     * Test it can detemine the content types of a file.
      * 
      * @group clarifai
     */
