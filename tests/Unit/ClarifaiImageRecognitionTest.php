@@ -7,6 +7,8 @@ use App\Services\ImageRecognition\ClarifaiImageRecognition;
 
 class ClarifaiImageRecognitionTest extends TestCase
 {
+    protected $file;
+    protected $files;
     protected $response1;  // single file input.
     protected $response2;  // multiple file inputs.
     protected $svc;
@@ -16,16 +18,16 @@ class ClarifaiImageRecognitionTest extends TestCase
         parent::setup();
 
         // Sample files submitted by a user.
-        $input = ["https://samples.clarifai.com/metro-north.jpg"];
-        $inputs = [
+        $this->file = ["https://samples.clarifai.com/metro-north.jpg"];
+        $this->files = [
            "https://samples.clarifai.com/metro-north.jpg", 
            "https://samples.clarifai.com/wedding.jpg"
         ];
 
         // Send request to the external API.
         $this->svc = new ClarifaiImageRecognition;
-        $this->response1 = $this->svc->send_request($input);  
-        $this->response2 = $this->svc->send_request($inputs); 
+        $this->response1 = $this->svc->send_request($this->file);  
+        $this->response2 = $this->svc->send_request($this->files); 
     }
 
     /**
@@ -40,32 +42,10 @@ class ClarifaiImageRecognitionTest extends TestCase
     }
 
     /**
-     * Test it can transform the API request. Each array value contains: 
-     *   image id
-     *   data containing an array of obejcts with: concept names and percentages.
+     * Test it can detemine the content types of a file.
      *
      * @group clarifai
      */
-    public function test_clarifai_can_transform_response()
-    {
-        $response = $this->response2;
-        $formatted_response = $this->svc->transform($response);
-        $content = ($formatted_response[0]);
-
-        // Results have an image 'id' key.
-        $this->assertEquals(true, array_key_exists('id', $content));
-        // Results have a 'data' key.
-        $this->assertEquals(true, array_key_exists('data', $content));
-        // 'Data contains an array with 'name' and 'value' parameters
-        $this->assertEquals('train', $content['data'][0]->name );
-        $this->assertGreaterThan(0, $content['data'][0]->value );
-    }
-
-    /** 
-     * Test it can detemine the content types of a file.
-     * 
-     * @group clarifai
-    */
     public function test_clarifai_determines_content_of_files()
     {
         $contents = $this->svc->get_contents_of_files($this->response2->get());
@@ -73,5 +53,20 @@ class ClarifaiImageRecognitionTest extends TestCase
         $this->assertContains("wedding", $contents[1]);
         $this->assertContains("man", $contents[1]);
         $this->assertContains("woman", $contents[1]);
+    }
+
+    /**
+     * Test it checks if the user-supplied word exists in file contents. 
+     *
+     * @group clarifai
+     */
+    public function test_which_files_contain_content()
+    {
+        $files = $this->files;  // files of a metro stop and a wedding.
+        $word1 = 'train';
+        $word2 = 'beach';
+
+        $this->assertCount(1, $this->svc->files_containing_word($word1, $files));
+        $this->assertCount(0, $this->svc->files_containing_word($word2, $files));
     }
 }
