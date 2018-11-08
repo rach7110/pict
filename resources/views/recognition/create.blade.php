@@ -26,6 +26,6 @@
             
         </div>
         {{-- Submit --}}    
-         <button type="submit" class="btn btn-primary">Submit</button>
+         <button type="submit" class="btn btn-primary offset-top">Submit</button>
     </form>
 @stop

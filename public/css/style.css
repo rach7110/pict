@@ -12,4 +12,4 @@ body {margin-top:70px; background-color: #636b6f;}
 
 .container {color: navajowhite; font-family: 'Courier New', Courier, monospace}
 
-button[type='submit'] { margin-top: 30px; }
+.offset-top { margin-top: 30px; }
