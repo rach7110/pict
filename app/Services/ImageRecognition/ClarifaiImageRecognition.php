@@ -23,7 +23,7 @@ use App\ImageRecognitionInterface;
      * Send request to API 
      * 
      * @param array $input
-     * @return Object
+     * @return ClarifaiOutput[] 
      */
     public function send_request($inputs)
     {
@@ -45,28 +45,12 @@ use App\ImageRecognitionInterface;
         // ])->executeSync(); 
     }
 
-    /** 
-     * Format the output of the API response.
-     * 
-     * @param ClarifaiObject $response
-     * @return array
-     */
-    public function transform($response)
+    public function outputs($response)
     {
-        $file_outputs = $response->get();  // Returns an array of ClarifaiOtput objects.
-        $results = [];
+        /** @var ClarifaiOutput[] $outputs */
+        $outputs = $response->get();
 
-         foreach ($file_outputs as $file_output) {
-            $image_id = $file_output->input()->id();
-            $data =[];
-            
-            foreach ($file_output->data() as $concept) {
-                $data[] = json_decode(json_encode(['name' => $concept->name(), 'value' => $concept->value()]));
-            }
-            $results[] = ['id'=> $image_id, 'data' => $data];
-        }
-
-        return $results;
+        return $outputs;
     }
 
     /** 
@@ -102,5 +86,51 @@ use App\ImageRecognitionInterface;
         }
 
         return $contents;
+    }
+
+    /** 
+     * Check if content exists in files.
+     * 
+     * @param array $file_results
+     * 
+     * return array 
+     * 
+     */
+    public function files_containing_word($word, $files)
+    {
+        $file_with_contents = [];
+
+        $file_outputs = $this->send_request($files)->get();        
+
+        foreach ($file_outputs as $file_output) {
+            $image = $file_output->input();
+            dd($image->url());
+
+            $image_id = $file_output->input()->id();
+            $contents = $this->get_contents($file_output);
+
+            if(in_array($word, $contents)) {
+                $file_with_contents[] = $image_id;
+            }
+        }
+
+        return $file_with_contents;
+    }
+
+    public function get_results($response)
+    {
+
+
+        // foreach ($outputs as $output) {
+        //     /** @var ClarifaiURLImage $image */
+        //     $image = $output->input();
+        //     echo "Predicted concepts for image at url " . $image->url() . "\n";
+            
+        //     /** @var Concept $concept */
+        //     foreach ($output->data() as $concept) {
+        //         echo $concept->name() . ': ' . $concept->value() . "\n";
+        //     }
+        //     echo "\n";
+        // }
     }
 }

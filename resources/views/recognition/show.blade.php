@@ -3,15 +3,15 @@
     <title>Image Concepts</title>
 </head>
 @section('content')
-    <a class="btn btn-primary offset-top" href="{{route('recognition')}}">New</a>
+    <a class="btn btn-primary" href="{{route('recognition')}}">New</a>
     @if(isset($results))
     <h3>Here are the results:</h3>
     @foreach($results as $result)
         <div class="row">
-            <p>{{$result['id']}}</p>
+            <p>{{ $result->input()->id() }}</p>
             <hr/>
-            @foreach($result['data'] as $concept)
-                <p>{{$concept->name}}: {{$concept->value}}</span></p>
+            @foreach ($result->data() as $concept) 
+                <p>{{$concept->name()}}: {{$concept->value() }}
             @endforeach
         </div>
     @endforeach

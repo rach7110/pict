@@ -28,7 +28,7 @@ class ImageRecognitionController extends Controller
      */
     public function analyze(Request $request)
     {
-        $content_file = request()->file('content');
+        // $content_file = request()->file('content');
         $user_files = request()->file('image');
 
         // Validate the file contents.
@@ -43,7 +43,7 @@ class ImageRecognitionController extends Controller
         $response = $this->imageRecognitionSvc->send_request($user_files);
 
         if($response->isSuccessful()) {
-            $results =  $this->imageRecognitionSvc->transform($response);
+            $results = $this->imageRecognitionSvc->outputs($response);
 
             $request->session()->flash('message', 'Success!');
             $request->session()->flash('alert-class', 'alert-info');

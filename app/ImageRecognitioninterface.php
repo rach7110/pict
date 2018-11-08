@@ -4,5 +4,5 @@
  interface ImageRecognitionInterface
 {
     public function send_request($input);
-     public function transform($response);
+     public function outputs($response);
 } 
