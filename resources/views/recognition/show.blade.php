@@ -3,6 +3,7 @@
     <title>Image Concepts</title>
 </head>
 @section('content')
+    <a class="btn btn-primary offset-top" href="{{route('recognition')}}">New</a>
     @if(isset($results))
     <h3>Here are the results:</h3>
     @foreach($results as $result)
