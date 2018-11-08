@@ -19,7 +19,8 @@ use App\ImageRecognitionInterface;
         $this->client = new ClarifaiClient(config('clarifai.secret'));
     }
  
-    /** Send request to API 
+    /** 
+     * Send request to API 
      * 
      * @param array $input
      * @return Object
@@ -44,7 +45,8 @@ use App\ImageRecognitionInterface;
         // ])->executeSync(); 
     }
 
-    /** Format the output of the API response.
+    /** 
+     * Format the output of the API response.
      * 
      * @param ClarifaiObject $response
      * @return array
@@ -63,6 +65,42 @@ use App\ImageRecognitionInterface;
             }
             $results[] = ['id'=> $image_id, 'data' => $data];
         }
+
         return $results;
+    }
+
+    /** 
+     * Get the contents of multiple files.
+     * 
+     * @param ClarifaiOutput $file_outputs
+     * @return array
+     */
+    public function get_contents_of_files($file_outputs)
+    {
+        $contents_of_files = [];
+
+        foreach ($file_outputs as $file_output) {
+            $content = $this->get_contents($file_output);
+            $contents_of_files[] = $content;
+        }
+
+        return $contents_of_files;
+    }
+
+    /** 
+     * Get the contents of a single file.
+     * 
+     * @param ClarifaiOutput $file_output
+     * @return array
+     */
+    public function get_contents($file_output)
+    {
+        $contents = [];
+
+        foreach ($file_output->data() as $concept) {
+            $contents[] = $concept->name(); 
+        }
+
+        return $contents;
     }
 }
