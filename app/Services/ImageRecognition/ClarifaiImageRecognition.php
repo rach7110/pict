@@ -35,7 +35,7 @@ use App\ImageRecognitionInterface;
  
         $model = $this->client->publicModels()->generalModel();
         $response = $model->batchPredict($files)->executeSync();
-        
+
         return $response;
 
         //Remote file example:
@@ -91,46 +91,27 @@ use App\ImageRecognitionInterface;
     /** 
      * Check if content exists in files.
      * 
-     * @param array $file_results
+     * @param string|array $word|$files
      * 
      * return array 
-     * 
      */
-    public function files_containing_word($word, $files)
+    public function files_containing_content($word, $files)
     {
-        $file_with_contents = [];
-
-        $file_outputs = $this->send_request($files)->get();        
+        $files_with_content = [];
+        $response = $this->send_request($files);
+        $file_outputs = $this->outputs($response);        
 
         foreach ($file_outputs as $file_output) {
             $image = $file_output->input();
-            dd($image->url());
 
             $image_id = $file_output->input()->id();
             $contents = $this->get_contents($file_output);
 
             if(in_array($word, $contents)) {
-                $file_with_contents[] = $image_id;
+                $files_with_content[] = $image_id;
             }
         }
 
-        return $file_with_contents;
-    }
-
-    public function get_results($response)
-    {
-
-
-        // foreach ($outputs as $output) {
-        //     /** @var ClarifaiURLImage $image */
-        //     $image = $output->input();
-        //     echo "Predicted concepts for image at url " . $image->url() . "\n";
-            
-        //     /** @var Concept $concept */
-        //     foreach ($output->data() as $concept) {
-        //         echo $concept->name() . ': ' . $concept->value() . "\n";
-        //     }
-        //     echo "\n";
-        // }
+        return $files_with_content;
     }
 }

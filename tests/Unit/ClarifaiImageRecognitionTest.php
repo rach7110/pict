@@ -62,11 +62,12 @@ class ClarifaiImageRecognitionTest extends TestCase
      */
     public function test_which_files_contain_content()
     {
-        $files = $this->files;  // files of a metro stop and a wedding.
-        $word1 = 'train';
+        $files = ['https://placekitten.com/200/139'];
+
+        $word1 = 'cat';
         $word2 = 'beach';
 
-        $this->assertCount(1, $this->svc->files_containing_word($word1, $files));
-        $this->assertCount(0, $this->svc->files_containing_word($word2, $files));
+        $this->assertCount(1, $this->svc->files_containing_content($word1, $files));
+        $this->assertCount(0, $this->svc->files_containing_content($word2, $files));
     }
 }
