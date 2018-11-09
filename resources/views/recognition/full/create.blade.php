@@ -6,7 +6,7 @@
     <h1>Image Concepts</h1>
     <h3>This is where we will allow the user to upload image(-s)</h3>
     
-    <form method="POST" action="{{route('recognition.analyze')}}" enctype="multipart/form-data">
+    <form method="POST" action="{{route('recognition.full.analyze')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         
          {{-- Content to train the image recogition model. --}}
