@@ -1,15 +1,16 @@
 .accent-1{color:#7fb4d7;}
+.navbar-nav a{color:#7fb4d7;}
 .accent-2{color:#B9D9EC;}
 .accent-3{color:#d14218;}
 .accent-4{color:#bfaeaa;}
 .accent-5{color:#636b6f;}
 
-body {margin-top:70px; background-color: #636b6f;}
+body {background-color: #636b6f;}
 
-.navbar {font-size: 1.8em; background-color: #080808;}
+.navbar { background-color: #080808;}
 
 .alert {margin: 0px auto; }
 
-.container {color: navajowhite; font-family: 'Courier New', Courier, monospace}
+.container {margin-top:20px; color: navajowhite; font-family: 'Courier New', Courier, monospace}
 
 .offset-top { margin-top: 30px; }
