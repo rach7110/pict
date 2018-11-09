@@ -1,51 +1,47 @@
 <!DOCTYPE html>
  <html>
  <head>
-    <!-- JQUERY -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- EXTERNAL SCRIPTS -->
     <script src="{{ URL::asset('js/script.js') }}"></script>
-    <!-- JQUERY FOR BOOTSTRAP -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- JQuery FOR BOOTSTRAP -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <!-- CSS FOR BOOTSTRAP -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     {{-- FONT AWESOME --}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Kodchasan" rel="stylesheet" type="text/css">
-     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/style.css') }}">
-     <meta name="HandheldFriendly" content="true">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/style.css') }}">
+    <meta name="HandheldFriendly" content="true">
+
     <meta name="viewport" content="width=device-width, initial-scale=0.666667, maximum-scale=0.666667, user-scalable=0">
     <meta name="viewport" content="width=device-width">
 </head>
 <body class=".accent-5">
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">
-                    <span class="accent-1">P</span>
-                    <span class="accent-2">i</span>
-                    <span class="accent-3">c</span>
-                    <span class="accent-4">t</span>
-                </a>
-                <!-- MENU TOGGLE BUTTON -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    {{-- Hamburger icon. --}}
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav right">
-                    <li><a href="{{route('recognition.full')}}"><span class="accent-1">Full</span></a></li>
-                    <li><a href="{{route('recognition.concept')}}"><span class="accent-1">Concept</span></a></li>
-                </ul>
-            </div>
-         </div><!-- /.container-fluid -->
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/">
+            <span class="accent-1">P</span>
+            <span class="accent-2">i</span>
+            <span class="accent-3">c</span>
+            <span class="accent-4">t</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse " id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('recognition.full')}}">Full</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('recognition.concept')}}">Concepts</a>
+                </li>
+            </ul>
+        </div>
     </nav>
     <div class="container">
         {{--  Error Messages --}}
