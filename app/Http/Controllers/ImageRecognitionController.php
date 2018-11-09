@@ -50,7 +50,7 @@ class ImageRecognitionController extends Controller
         if($response->isSuccessful()) {
             $results = $this->imageRecognitionSvc->outputs($response);
             
-            return view('recognition.show')->with(['results' => $results]);
+            return view('recognition.full.show')->with(['results' => $results]);
         } else {
             $request->session()->flash('message', 'Problem analyzing your file. 
                                         Please try again in a few minutes.  
@@ -58,7 +58,7 @@ class ImageRecognitionController extends Controller
                                         );
             $request->session()->flash('alert-class', 'alert-danger');
 
-            return redirect()->route('recognition');
+            return redirect()->route('recognition.full');
         }
     }
 } 
