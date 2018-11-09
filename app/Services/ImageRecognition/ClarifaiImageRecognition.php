@@ -22,7 +22,7 @@ use App\ImageRecognitionInterface;
     /** 
      * Send request to API 
      * 
-     * @param array $input
+     * @param array $inputs
      * @return ClarifaiOutput[] 
      */
     public function send_request($inputs)
@@ -37,12 +37,6 @@ use App\ImageRecognitionInterface;
         $response = $model->batchPredict($files)->executeSync();
 
         return $response;
-
-        //Remote file example:
-        // $response = $model->batchPredict([
-        //     new ClarifaiURLImage('https://samples.clarifai.com/metro-north.jpg'),
-        //     new ClarifaiURLImage('https://samples.clarifai.com/wedding.jpg'),
-        // ])->executeSync(); 
     }
 
     public function outputs($response)
