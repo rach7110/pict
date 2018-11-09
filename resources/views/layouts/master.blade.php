@@ -23,6 +23,12 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    <span class="accent-1">P</span>
+                    <span class="accent-2">i</span>
+                    <span class="accent-3">c</span>
+                    <span class="accent-4">t</span>
+                </a>
                 <!-- MENU TOGGLE BUTTON -->
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
@@ -34,14 +40,9 @@
             </div>
              <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{ route('recognition') }}">
-                                <span class="accent-1">P</span>
-                                <span class="accent-2">i</span>
-                                <span class="accent-3">c</span>
-                                <span class="accent-4">t</span>
-                            </a>
-                        </li>
+                <ul class="nav navbar-nav right">
+                    <li><a href="{{route('recognition.full')}}"><span class="accent-1">Full</span></a></li>
+                    <li><a href="{{route('recognition.concept')}}"><span class="accent-1">Concept</span></a></li>
                 </ul>
             </div>
          </div><!-- /.container-fluid -->

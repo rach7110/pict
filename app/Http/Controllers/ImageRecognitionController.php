@@ -15,9 +15,14 @@ class ImageRecognitionController extends Controller
         $this->imageRecognitionSvc = $imageRecognitionService;
     }
     
-    public function create()
+    public function createFullAnalysis()
     {
-        return view('recognition.create');
+        return view('recognition.full.create');
+    }
+
+    public function createConceptAnalysis()
+    {
+        return view('recognition.concept.create');
     }
     
     /**

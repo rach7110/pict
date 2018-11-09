@@ -91,7 +91,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="{{route('recognition')}}">Let's begin</a>
+                    <a href="{{route('recognition.full')}}">Let's begin</a>
                 </div>
             </div>
         </div>
