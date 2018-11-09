@@ -20,19 +20,17 @@
     <meta name="viewport" content="width=device-width">
 </head>
 <body class=".accent-5">
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="/">
             <span class="accent-1">P</span>
             <span class="accent-2">i</span>
             <span class="accent-3">c</span>
             <span class="accent-4">t</span>
         </a>
-
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-        <div class="collapse navbar-collapse " id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('recognition.full')}}">Full</a>
@@ -43,6 +41,7 @@
             </ul>
         </div>
     </nav>
+
     <div class="container">
         {{--  Error Messages --}}
         @if(count($errors)>0)
